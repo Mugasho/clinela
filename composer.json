@@ -1,0 +1,24 @@
+{
+  "name": "vendor_name/clinela",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "LINCOLN",
+      "email": "mugalink2@gmail.com"
+    }
+  ],
+  "require": {
+    "altorouter/altorouter": "2.0.1",
+    "owasp/phprbac": "2.0.0",
+    "ext-mbstring": "*",
+    "ext-mysqli": "*",
+    "ext-openssl": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "clinela\\":"app/"
+    }
+  }
+}
