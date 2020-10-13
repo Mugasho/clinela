@@ -26,6 +26,8 @@ if(isset($_GET['book_date'],$_GET['service_id'],$_GET['amount'],$_GET['slot_id']
         if($db->addAppointment($user_id,$data)){
             $slot=$db->getSlotByID($slot_id);
             $user=$db->getUserMeta($user_id);
+			$user2=$db->getUserMeta($id);
+			
 
             //for patient
             $to                  = $user['email'];
@@ -33,24 +35,26 @@ if(isset($_GET['book_date'],$_GET['service_id'],$_GET['amount'],$_GET['slot_id']
             $from                = $db->getOptions( 'site_email' );
             $from                = 'info@clineladoctors.com';
             $content             = $user;
-            $content['msg']      = 'Appointment booked with Dr. '.$user['first_name'].' '
-                .$user['last_name'].' on '.$book_date.' '.$slot['start_time'].' to '.$slot['end_time'].'';
+            $content['msg']      = 'Appointment booked with Dr. '.$user2['first_name'].' '
+                .$user2['last_name'].' on '.date('h:i a',strtotime($slot['start_time'])).' to '.date('h:i a',strtotime($slot['end_time'])).'';
             $content['btn_text'] = 'View Appointment';
             $content['btn_link'] = 'patient/dashboard/';
             $utils->sendEmail( $from, $to, $subject, $utils->getHtmlMessage( $content ) );
+            $utils->sendSMS( 'ClineDoctors', $user['phone'], $content['msg']);
 
             //for doctor
-            $user2=$db->getUserMeta($id);
+           
             $to                  = $user2['email'];
             $subject             = 'New Appointment';
             $from                = $db->getOptions( 'site_email' );
             $from                = 'info@clineladoctors.com';
             $content             = $user2;
-            $content['msg']      = 'You have a new Appointment booked by . '.$user['username'].' on '
-                .$book_date.' '.$slot['start_time'].' to '.$slot['end_time'].'';
+            $content['msg']      = 'You have a new Appointment booked by . '.$user['username'].' on 
+                '.date('h:i a',strtotime($slot['start_time'])).' to '.date('h:i a',strtotime($slot['end_time'])).'';
             $content['btn_text'] = 'View Appointment';
             $content['btn_link'] = 'doctor/dashboard/';
             $utils->sendEmail( $from, $to, $subject, $utils->getHtmlMessage( $content ) );
+            $utils->sendSMS( 'ClineDoctors', $user2['phone'], $content['msg'] );
             header('Location:'.BASE_PATH.'booked/'.$id.'/?tx='.$data['tx_id']);
         }
     }else{

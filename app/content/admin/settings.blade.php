@@ -343,6 +343,14 @@ $db = new \clinela\database\DB();
                     <label>Whatsapp</label>
                     <input type="text" class="form-control" value="<?php echo $db->getOptions('social_whatsapp')?>" name="social_whatsapp">
                 </div>
+                <div class="form-group">
+                    <label>SMS API email</label>
+                    <input type="text" class="form-control" value="<?php echo $db->getOptions('sms_api_email')?>" name="sms_api_email">
+                </div>
+                <div class="form-group">
+                    <label>SMS API password</label>
+                    <input type="password" class="form-control" value="<?php echo $db->getOptions('sms_api_password')?>" name="sms_api_password">
+                </div>
             </div>
         </div>
         <!--Social Links section-->
@@ -355,11 +363,16 @@ $db = new \clinela\database\DB();
                 <div class="card-body">
                     <div class="form-group">
                         <label>Header code</label>
-                        <textarea type="text" class="form-control" value="<?php echo $db->htmlDecode($db->getOptions('site_header_code'))?>" name="site_header_code" rows="5"></textarea>
+                        <textarea type="text" class="form-control"  name="site_header_code" rows="5"><?php echo $db->getOptions('site_header_code')?></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Above Footer code</label>
+
+                        <textarea type="text" class="form-control"   name="site_above_footer_code" rows="5"><?php echo $db->getOptions('site_above_footer_code')?></textarea>
                     </div>
                     <div class="form-group">
                         <label>Footer code</label>
-                        <textarea type="text" class="form-control" value="<?php echo $db->htmlDecode($db->getOptions('site_footer_code'))?>" name="site_footer_code" rows="5"></textarea>
+                        <textarea type="text" class="form-control"  name="site_footer_code" rows="5"><?php echo $db->getOptions('site_footer_code')?></textarea>
                     </div>
                 </div>
             </div>

@@ -78,7 +78,6 @@ $appointments=$db->getDoctorAppointments($id);
                                 <a href="<?php echo BASE_PATH.'chat/'.$id.'/'?>">
                                     <i class="fas fa-comments"></i>
                                     <span>Message</span>
-                                    <small class="unread-msg">23</small>
                                 </a>
                             </li>
                             <li>

@@ -8,6 +8,7 @@ $users=$db->getAllUsers();
         <div class="card">
             <div class="card-body">
                 <div class="text-right">
+                    <a href="#send-sms" class="btn-primary btn btn-rounded mb-2" data-toggle="modal"> <i class="fe fe-phone"></i> Send SMS</a>
                     <a href="#send-mails" class="btn-primary btn btn-rounded mb-2" data-toggle="modal"> <i class="fe fe-mail"></i> Send emails</a>
                 </div>
                 <div class="table-responsive">
@@ -117,6 +118,54 @@ $users=$db->getAllUsers();
     </div>
 </div>
 <!-- /ADD Modal -->
+
+<!-- SMS Modal -->
+<div class="modal fade" id="send-sms" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Send SMS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <input name="sms" value="true" hidden>
+                    <div class="row form-row">
+                        <div class="col-12 col-lg-8">
+                            <div class="form-group">
+                                <label>Sender</label>
+                                <input type="text" class="form-control" name="sender" required="required">
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-4">
+                            <div class="form-group">
+                                <label>User type</label>
+                                <select type="text" class="form-control" name="role">
+                                    <option value="3">All Users</option>
+                                    <option value="1">Doctors</option>
+                                    <option value="0">Patients</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-12">
+                            <div class="form-group">
+                                <label>Message</label>
+                                <textarea class="form-control " rows="5" name="message"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Send SMS</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /SMS Modal -->
 
 <script>
     function reqListener() {

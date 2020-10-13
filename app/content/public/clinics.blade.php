@@ -69,8 +69,7 @@ $clinics=$db->getPagedClinics($limit,$offset,$search,$location);
                                     <i class="fas fa-star filled"></i>
                                     <i class="fas fa-star filled"></i>
                                     <i class="fas fa-star filled"></i>
-                                    <i class="fas fa-star"></i>
-                                    <span class="d-inline-block average-rating">(17)</span>
+
                                 </div>
                                 <div class="clinic-details">
                                     <div class="clini-infos pt-3">

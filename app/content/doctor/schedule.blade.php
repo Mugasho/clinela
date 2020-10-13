@@ -82,7 +82,6 @@ $slotsSunday=$db->getUserSlotsByDay($id,7);
                             <a href="<?php echo BASE_PATH.'chat/'.$id.'/'?>">
                                 <i class="fas fa-comments"></i>
                                 <span>Message</span>
-                                <small class="unread-msg">23</small>
                             </a>
                         </li>
                         <li>
@@ -545,6 +544,9 @@ $slotsSunday=$db->getUserSlotsByDay($id,7);
     .clocklet-container{
         z-index: 1500 !important;
     }
+    .select2-container {
+        width: 100% !important;
+    }
 </style>
 <script>
     function setDay(day) {
@@ -552,12 +554,26 @@ $slotsSunday=$db->getUserSlotsByDay($id,7);
     }
 
     document.addEventListener("DOMContentLoaded", function(event) {
-        // Your code to run since DOM is loaded and ready
-        $.getJSON("<?php echo BASE_PATH?>request/1/?clinics", function (json) {
-            $(".select2").select2({
-                data: json,
-                width: "100%"
-            });
+        $('.select2').select2({
+            ajax: {
+                url: "<?php echo BASE_PATH?>request/1/",
+                data: function (params) {
+                    var query = {
+                        clinics: 'yes',
+                        search: params.term,
+                        limit: '20'
+                    }
+
+                    // Query parameters will be ?search=[term]&type=public
+                    return query;
+                },
+                processResults: function (data) {
+                    var ob=JSON.parse(data);
+                    return {
+                        results: ob
+                    };
+                }
+            }
         });
     });
 

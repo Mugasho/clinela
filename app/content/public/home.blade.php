@@ -143,7 +143,7 @@ $section_5_color=!empty($db->getOptions('section_5_color'))?'style="background-c
                                 <i class="fas fa-star filled"></i>
                                 <i class="fas fa-star filled"></i>
                                 <i class="fas fa-star filled"></i>
-                                <span class="d-inline-block average-rating">(17)</span>
+
                             </div>
                             <ul class="available-info">
                                 <li>
@@ -275,7 +275,7 @@ $section_5_color=!empty($db->getOptions('section_5_color'))?'style="background-c
     function setFavourite(id) {
         var oReq = new XMLHttpRequest();
         oReq.addEventListener("load", reqListener);
-        oReq.open("GET", "<?php echo BASE_PATH?>request/" + id + "/?op=add");
+        oReq.open("GET", "<?php echo BASE_PATH?>request/" + id + "/?op=add&id=<?php echo $_SESSION['id']?>");
         oReq.send();
     }
 

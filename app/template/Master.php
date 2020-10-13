@@ -42,6 +42,9 @@ class Master
     public $dateFounded;
     public $header_code;
     public $footer_code;
+    public $above_footer_code;
+
+
 
 
     /**
@@ -109,6 +112,7 @@ class Master
             }
         }
     }
+
 
     public function makeFooterScripts()
     {
@@ -675,6 +679,22 @@ class Master
      */
     public function setFooterCode( $footer_code ) {
         $this->footer_code = $footer_code;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAboveFooterCode()
+    {
+        return $this->above_footer_code;
+    }
+
+    /**
+     * @param mixed $above_footer_code
+     */
+    public function setAboveFooterCode($above_footer_code)
+    {
+        $this->above_footer_code = $above_footer_code;
     }
 
 

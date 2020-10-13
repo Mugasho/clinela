@@ -80,7 +80,9 @@ $prescriptions=$db->getPrescriptions($id);
     </div>
     <!-- /Profile Sidebar -->
 
+
     <div class="col-md-7 col-lg-8 col-xl-9">
+
         <div class="card">
             <div class="card-body pt-0">
 
@@ -129,7 +131,7 @@ $prescriptions=$db->getPrescriptions($id);
                                                 $doctor=$db->getUserMeta($appointment['doctor_id']);
                                                 $doctor_img=!empty($doctor['photo'])?CONTENT_PATH.'uploads/'.$doctor['photo']:CONTENT_PATH.'public/img/patients/patient.jpg';
                                                 $slot=$db->getSlotByID($appointment['slot_id']);
-                                                $hospital=$db->getClinicByID($slot['hospital_id']);
+                                                $hospital=!empty($slot)?$db->getClinicByID($slot['hospital_id']):'';
                                                 $speciality=$db->getUserSpeciality($doctor['user_id']);
                                                 $clinic=!empty($hospital)?$hospital['clinic']:'Default';
                                                 $follow=!empty($appointment['follow_date'])? date('d M Y',strtotime($appointment['follow_date'])):'';
@@ -172,58 +174,11 @@ $prescriptions=$db->getPrescriptions($id);
                     <!-- Prescription Tab -->
                     <div class="tab-pane fade" id="pat_prescriptions">
                         <div class="card card-table mb-0">
+                            <div class="card-header">
+                                <a href="<?php echo BASE_PATH?>patient/prescription/" class="btn btn-primary">Download</a>
+                            </div>
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-center mb-0">
-                                        <thead>
-                                        <tr>
-                                            <th>Date </th>
-                                            <th>Name</th>
-                                            <th>Frequency</th>
-                                            <th>Period</th>
-                                            <th>Total</th>
-                                            <th>Advice</th>
-                                            <th>Created by </th>
-                                            <th></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php if (!empty($prescriptions)) {
-                                            foreach ($prescriptions as $prescription) {
-                                                $doctor=$db->getUserMeta($prescription['doctor_id']);
-                                                $doctor_img=!empty($doctor['photo'])?CONTENT_PATH.'uploads/'.$doctor['photo']:CONTENT_PATH.'public/img/patients/patient.jpg';
-                                                $speciality=$db->getUserSpeciality($doctor['user_id']);
-                                                echo '<tr>
-                                                <td>'.date('d M Y',strtotime($prescription['created_at'])).'</td>
-                                                <td>'.$prescription['drug_name'].'</td>
-                                                <td>'.$prescription['frequency'].'</td>
-                                                <td>'.$prescription['days'].'</td>
-                                                <td>'.$prescription['total'].' </td>
-                                                <td>'.$prescription['advice'].'</td>
-                                                <td>
-                                                    <h2 class="table-avatar">
-                                                        <a href="'.BASE_PATH.'doctors/'.$doctor['user_id'].'/" class="avatar avatar-sm mr-2">
-                                                            <img class="avatar-img rounded-circle" src="'.$doctor_img.'" alt="User Image">
-                                                        </a>
-                                                        <a href="'.BASE_PATH.'doctors/'.$doctor['user_id'].'/">Dr. '.$doctor['first_name'].' '.$doctor['last_name'].' <span>'.$speciality['speciality'].'</span></a>
-                                                    </h2>
-                                                </td>
-                                                <td class="text-right">
-
-                                                </td>
-                                            </tr>';
-                                            }
-                                        }else{
-                                            echo '<tr>
-                                            <td>No Prescriptions</td>
-
-                                        </tr>';
-                                        }?>
-
-
-                                        </tbody>
-                                    </table>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>

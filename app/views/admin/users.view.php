@@ -45,6 +45,19 @@ if(isset($_POST['subject'],$_POST['role'],$_POST['message'])){
     $page->setPageError('Emails Sent to users', 'Success', 'success');
 
 }
+
+if(isset($_POST['sender'],$_POST['role'],$_POST['message'],$_POST['sms'])){
+    $role=filter_input(INPUT_POST,'role',FILTER_SANITIZE_NUMBER_INT);
+    $sender=filter_input(INPUT_POST,'sender',FILTER_SANITIZE_STRING);
+    $message=filter_input(INPUT_POST,'message',FILTER_SANITIZE_STRING);
+    $users=$db->getAllUserMeta();
+    foreach ($users as $user){
+        $utils->sendSMS( $sender, $user['phone'], $message);
+    }
+    $page->setPageError('SMS Sent to users', 'Success', 'success');
+
+}
+
 $page->addStyle('summernote.css', CONTENT_PATH . 'admin/plugins/summernote/dist/');
 $page->addScripts('summernote.js', CONTENT_PATH.'admin/plugins/summernote/dist/');
 $page->setPageContent('admin/users.blade.php');

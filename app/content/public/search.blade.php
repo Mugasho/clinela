@@ -1,9 +1,8 @@
 <?php
 $db = new \clinela\database\DB();
 $specialities = $db->getSpecialities(6);
-
 $get=array();
-$query=mb_split("&",parse_url($_SERVER['HTTP_REFERER'],PHP_URL_QUERY));
+$query=mb_split("&",parse_url($_SERVER['REQUEST_URI'],PHP_URL_QUERY));
 if(!empty($query)) foreach ($query as $qr){
     $vars=mb_split('=',$qr);
     $get[$vars[0]]=$vars[1];
@@ -91,8 +90,8 @@ $doctors = $db->getApprovedUsers(1, null, $location,$search);
                                 <i class="fas fa-star filled"></i>
                                 <i class="fas fa-star filled"></i>
                                 <i class="fas fa-star filled"></i>
-                                <i class="fas fa-star"></i>
-                                <span class="d-inline-block average-rating">(17)</span>
+
+
                             </div>
                             <div class="clinic-details">
                                 <p class="doc-location"><i class="fas fa-map-marker-alt"></i> ' . $city . $state . $country . '</p>

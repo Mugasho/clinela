@@ -9,6 +9,7 @@ if(isset($_GET['d'],$_GET['app']) ){
         $db->approveAppointment($app_id,$status);
         $appointment=$db->getAppointmentByID($app_id);
         $user=$db->getUserByID($appointment['user_id']);
+        $meta=$db->getUserMeta($user['id']);
         $doctor=$db->getUserMeta($appointment['doctor_id']);
         $slot=$db->getSlotByID($appointment['slot_id']);
         $to                  = $user['email'];
@@ -21,6 +22,7 @@ if(isset($_GET['d'],$_GET['app']) ){
         $content['btn_text'] = 'View Appointment';
         $content['btn_link'] = 'patient/dashboard/';
         $utils->sendEmail( $from, $to, $subject, $utils->getHtmlMessage( $content ) );
+        $utils->sendSMS( 'ClineDoctors', $meta['phone'], $content['msg']);
     }
 
 }

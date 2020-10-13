@@ -4,6 +4,8 @@
 namespace clinela\utils;
 
 
+use clinela\database\DB;
+
 class Utils {
     public $countries;
 
@@ -846,4 +848,33 @@ class Utils {
         return $day;
     }
 
+    public function sendSMS($sender, $destination, $message)
+    {
+
+        $db=new DB();
+        if (strncmp($destination, "0", 1) === 0){
+           $destination= '256'.mb_strcut($destination,1);
+        }
+        if (strncmp($destination, "+", 1) === 0){
+            $destination= mb_strcut($destination,1);
+        }
+        $email = $db->getOptions('sms_api_email');
+        $password = $db->getOptions('sms_api_password');
+        $url = 'http://caltonmobile.com/calton/api.php?';
+        $parameters = 'username=[EMAIL]&password=[PASSWORD]&contacts=[DESTINATION]&message=[MESSAGE]&sender=[SENDERID]';
+        $parameters = str_replace('[EMAIL]',$email,$parameters);
+        $parameters = str_replace('[PASSWORD]',urlencode($password),$parameters);
+        $parameters = str_replace('[DESTINATION]',$destination,$parameters);
+        $parameters = str_replace('[MESSAGE]',urlencode($message),$parameters);
+        $parameters = str_replace('[SENDERID]',urlencode($sender),$parameters);
+        $post_url = $url.$parameters;
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_URL, $post_url);
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        return json_decode($result);
+    }
 }

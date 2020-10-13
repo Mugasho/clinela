@@ -12,7 +12,7 @@ $sidebar_color=!empty($db->getOptions('admin_sidebar_color'))?'style="background
                 <?php
                 foreach ($this->getMenu() as $key => $value) {
                     $off = isset(explode("/", $_SERVER['REQUEST_URI'])[2]) ? 2 : 1;
-                    $active = $value['path'] == explode("/", $_SERVER['REQUEST_URI'])[$off] ? ' active"' : '';
+                    $active = $value['path'] == explode("/", $_SERVER['REQUEST_URI'])[$off] ? ' active current-page"' : '';
                     $href = !is_null($value['items']) ? '#' : BASE_PATH . $value['path'];
                     $classes = !is_null($value['items']) ? 'has-submenu' : '';
 

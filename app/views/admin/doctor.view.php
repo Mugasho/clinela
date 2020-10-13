@@ -12,6 +12,12 @@ if(isset($_GET['d'],$_GET['sub'])){
             $db->approveDoctor($user['user_id'],$role);
             $page->setPageError('User updated', 'Success', 'success');
             break;
+        case 'up':
+            $user=$db->getUserMeta($id);
+            $role=$user['role']==1?0:1;
+            $db->upgradeUser($user['user_id'],$role);
+            $page->setPageError('Role changed to Patient', 'Success', 'success');
+            break;
     }
 
 }

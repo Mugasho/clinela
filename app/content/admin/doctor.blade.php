@@ -49,11 +49,14 @@ $doctors=$db->getUsersByRole(1);
 														</div></td>
                                      <td class="text-right">
                                         <div class="actions">
+                                        <a class="btn btn-sm bg-primary-light"  href="?d='.$doctor['id'].'&sub=up">
+                                                <i class="fe fe-download"></i>
+                                            </a>
                                             <a class="btn btn-sm bg-success-light"  href="'.BASE_PATH.'doctors/'.$doctor['id'].'/">
-                                                <i class="fe fe-eye"></i> View
+                                                <i class="fe fe-eye"></i>
                                             </a>
                                             <a  href="?d='.$doctor['id'].'&sub=sp" class="btn btn-sm bg-danger-light">
-                                                <i class="fe fe-trash"></i> Delete
+                                                <i class="fe fe-trash"></i>
                                             </a>
                                         </div>
                                     </td>

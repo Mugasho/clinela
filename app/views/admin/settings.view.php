@@ -115,17 +115,23 @@ if ( isset( $_POST['type'] ) && $_POST['type'] == 'site_info' ) {
     $linkedin = filter_input( INPUT_POST, 'social_linkedin', FILTER_SANITIZE_URL );
     $telegram = filter_input( INPUT_POST, 'social_telegram', FILTER_SANITIZE_URL );
     $whatsapp = filter_input( INPUT_POST, 'social_whatsapp', FILTER_SANITIZE_URL );
+    $api_email = filter_input( INPUT_POST, 'sms_api_email', FILTER_SANITIZE_STRING );
+    $api_pass = filter_input( INPUT_POST, 'sms_api_password', FILTER_SANITIZE_STRING );
     $db->updateOptions( 'social_facebook', $facebook );
     $db->updateOptions( 'social_twitter', $twitter );
     $db->updateOptions( 'social_linkedin', $linkedin );
     $db->updateOptions( 'social_instagram', $instagram );
     $db->updateOptions( 'social_telegram', $telegram);
     $db->updateOptions( 'social_whatsapp', $whatsapp );
+    $db->updateOptions( 'sms_api_email', $api_email );
+    $db->updateOptions( 'sms_api_password', $api_pass );
 
     $header_code = $db->htmlXSpecialChars( $_POST['site_header_code'] );
     $footer_code = $db->htmlXSpecialChars( $_POST['site_footer_code'] );
+    $above_footer_code = $db->htmlXSpecialChars( $_POST['site_above_footer_code'] );
     $db->updateOptions( 'site_header_code', $header_code );
     $db->updateOptions( 'site_footer_code', $footer_code );
+    $db->updateOptions( 'site_above_footer_code', $above_footer_code );
 }
 
 

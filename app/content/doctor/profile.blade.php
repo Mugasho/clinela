@@ -82,7 +82,6 @@ $profile_speciality = !empty($profile_info) ? $profile_info['speciality'] : 'No 
                             <a href="<?php echo BASE_PATH.'chat/'.$id.'/'?>">
                                 <i class="fas fa-comments"></i>
                                 <span>Message</span>
-                                <small class="unread-msg">23</small>
                             </a>
                         </li>
                         <li class="active">
