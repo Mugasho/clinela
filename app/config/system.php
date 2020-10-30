@@ -1,6 +1,6 @@
 <?php
 $protocol=!empty($_SERVER['HTTPS'])?'https://':'http://';
-define("PROTOCOL",$protocol);
+define("PROTOCOL",$protocol); /** know whether its http or https*/
 define("SERVER",PROTOCOL.$_SERVER['SERVER_NAME']);
 define("ROUTE",$_SERVER['REQUEST_URI']);
 define("BASE_PATH",PROTOCOL.$_SERVER['SERVER_NAME']."/");

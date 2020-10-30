@@ -374,6 +374,10 @@ $db = new \clinela\database\DB();
                         <label>Footer code</label>
                         <textarea type="text" class="form-control"  name="site_footer_code" rows="5"><?php echo $db->getOptions('site_footer_code')?></textarea>
                     </div>
+                    <div class="form-group">
+                        <label>Terms & Conditions</label>
+                        <textarea type="text" class="form-control summernote"  name="terms" rows="5"><?php echo $db->getOptions('terms')?></textarea>
+                    </div>
                 </div>
             </div>
             <!--Header-Footer Codes-->
@@ -381,3 +385,6 @@ $db = new \clinela\database\DB();
         </form>
     </div>
 </div>
+<script>
+    $('.summernote').summernote();
+</script>

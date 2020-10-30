@@ -14,6 +14,7 @@ $router->map( 'GET|POST', '/registered/', 'views/public/registered.view.php', 'r
 $router->map( 'GET|POST', '/setup/', 'views/admin/setup.php', 'setup' );
 $router->map( 'GET|POST', '/doctors/', 'views/public/doctors.view.php', 'search' );
 $router->map( 'GET|POST', '/blog/', 'views/public/blog.view.php', 'blog' );
+$router->map( 'GET|POST', '/packages/', 'views/public/packages.view.php', 'packages' );
 $router->map( 'GET|POST', '/blog/[*:id]/', 'views/public/blog-detail.view.php', 'blog-detail' );
 $router->map( 'GET|POST', '/doctors/[*:id]/', 'views/public/doctor-detail.view.php', 'doctor-detail' );
 $router->map( 'GET|POST', '/clinics/', 'views/public/clinics.view.php', 'clinics' );
@@ -26,6 +27,7 @@ $router->map( 'GET|POST', '/invoices/[*:id]/', 'views/public/invoice-detail.view
 $router->map( 'GET|POST', '/payment/[*:id]/', 'views/api/payment.view.php', 'payment' );
 $router->map( 'GET|POST', '/chat/[*:id]/', 'views/public/chat.view.php', 'chat' );
 $router->map( 'GET|POST', '/chat-api/[*:id]/', 'views/api/chat.view.php', 'chat-api' );
+$router->map( 'GET|POST', '/terms/', 'views/public/terms.view.php', 'terms' );
 
 $router->map( 'GET|POST', '/patient/', 'views/admin/patients.php', 'patients' );
 $router->map( 'GET|POST', '/patient/dashboard/', 'views/patient/dashboard.view.php', 'patient-dashboard' );
@@ -33,6 +35,7 @@ $router->map( 'GET|POST', '/patient/profile/', 'views/patient/profile.view.php',
 $router->map( 'GET|POST', '/patient/change-password/', 'views/patient/pass-change.view.php', 'patient-pass' );
 $router->map( 'GET|POST', '/patient/favourites/', 'views/patient/favourites.view.php', 'patient-favourites' );
 $router->map( 'GET|POST', '/patient/invoices/', 'views/patient/favourites.view.php', 'patient-invoices' );
+$router->map( 'GET|POST', '/patient/prescription/', 'views/patient/prescription.view.php', 'patient-prescription' );
 
 
 
@@ -65,6 +68,7 @@ $router->map( 'GET|POST', '/admin/users/[*:id]/', 'views/admin/profile.view.php'
 $router->map( 'GET|POST', '/admin/endpoint/', 'views/api/endpoint.php', 'admin-endpoint' );
 
 $router->map( 'GET|POST', '/request/[*:id]/', 'views/api/request.php', 'request' );
+$router->map( 'GET|POST', '/api/login/', 'views/api/api-login.php', 'api-login' );
 
 
 /* Match the current request */

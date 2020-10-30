@@ -7,7 +7,6 @@ $can_edit= isset($_SESSION['role'])&& $_SESSION['role']>1;
 ?>
 <div class="row">
     <div class="col-lg-8 col-md-12">
-
         <div class="row blog-grid-row">
             <?php
             if (!empty($main_posts)) {
@@ -18,22 +17,21 @@ $can_edit= isset($_SESSION['role'])&& $_SESSION['role']>1;
 
                 <!-- Blog Post -->
                 <div class="blog grid-blog">
-                    <div class="blog-image">
+                    <div class="blog-image" style="height:300px;">
                         <a href="'.$main_post['id'].'/"><img class="img-fluid" src="'.$img.'" alt="Post Image"></a>
                     </div>
                     <div class="blog-content">
                         <ul class="entry-meta meta-item">
                             <li>
                                 <div class="post-author">
-                                    <a href="doctor-profile.html"><img src="'.CONTENT_PATH . 'public/img/doctors/doctor-thumb-01.jpg" alt="Post Author"> <span>Dr.'.$user['username'].'</span></a>
+                                    <a href="#"><img src="'.CONTENT_PATH . 'public/img/doctors/doctor-thumb-01.jpg" alt="Post Author"> <span>Dr. '.$user['username'].'</span></a>
                                 </div>
                             </li>
-                            <li><i class="far fa-clock"></i> '.date("j M Y",strtotime($main_post['created_at'])).'</li>
+                            <li><i class="far fa-clock"></i>'.date("j M Y",strtotime($main_post['created_at'])).'</li>
                         </ul>
                         <h3 class="blog-title"><a href="'.$main_post['id'].'/">'.$main_post['title'].'</a></h3>
-                        <p class="mb-0">'.$db->limit($main_post['content'],200).'</p>
-                    </div>
-';
+                        <p class="mb-0">'.$db->limit(strip_tags($main_post['content']),200).'</p>
+                    </div>';
                     if($can_edit){
                         echo '<a href="'.BASE_PATH.'admin/edit-post/'.$main_post['id'].'/" class="btn btn-link"><i class="far fa-edit"></i> edit</a>';
                         echo '<a href="admin/posts/?d='.$main_post['id'].'" class="btn btn-link"><i class="far fa-trash-alt"></i> Delete</a>';
@@ -43,6 +41,7 @@ $can_edit= isset($_SESSION['role'])&& $_SESSION['role']>1;
                 <!-- /Blog Post -->
 
             </div>';
+
                 }
             }
             ?>
@@ -151,5 +150,3 @@ $can_edit= isset($_SESSION['role'])&& $_SESSION['role']>1;
     <!-- /Blog Sidebar -->
 
 </div>
-
-

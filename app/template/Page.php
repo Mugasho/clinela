@@ -20,6 +20,7 @@ class Page extends Master
 
         $this->setHeaderCode($db->htmlDecode($db->getOptions('site_header_code')));
         $this->setFooterCode($db->htmlDecode($db->getOptions('site_footer_code')));
+        $this->setAboveFooterCode($db->htmlDecode($db->getOptions('site_above_footer_code')));
 
         $this->setCompany($db->getOptions('site_name'));
         $this->setBodyClass('');
@@ -54,7 +55,9 @@ class Page extends Master
         $this->addMenu('Home', '', null, null);
         $this->addMenu('Doctors', 'doctors/', null, null);
         $this->addMenu('Clinics', 'clinics/', null, null);
+        $this->addMenu('Packages', 'packages/', null, null);
         $this->addMenu('Blog', 'blog/', null, null);
+        $this->addMenu('Terms', 'terms/', null, null);
     }
 
     /**
@@ -127,6 +130,8 @@ class Page extends Master
         }
 
         echo '</div></div>';
+
+        echo '<!-- above footer code -->' . PHP_EOL;
 
         /*--footer---*/
         if ($this->hasFooter) {

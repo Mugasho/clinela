@@ -291,6 +291,11 @@ VALUES (1, 1, UNIX_TIMESTAMP());");
 
         $this->addOption( 'site_header_code', '' );
         $this->addOption( 'site_footer_code', '' );
+        $this->addOption( 'site_above_footer_code', '' );
+
+        $this->addOption( 'sms_api_email', '' );
+        $this->addOption( 'sms_api_password', '' );
+        $this->addOption( 'terms', '' );
 
 
 
@@ -1302,11 +1307,11 @@ VALUES (1, 1, UNIX_TIMESTAMP());");
         return $result;
     }
 
-    public function addClinic($user_id, $clinic, $address = '', $phone = '', $details = '', $clinic_image = '')
+    public function addClinic($user_id, $clinic, $district = '',$county='',$subcounty='',$level='',$authority='',$ownership='', $phone = '', $details = '', $clinic_image = '')
     {
         $stmt = $this->mysqli->prepare("INSERT INTO " . DB_PREFIX . "_clinics (user_id, 
-        clinic,address,phone,details,clinic_image) VALUES (?, ?, ?, ?,?,?)");
-        $stmt->bind_param("isssss", $user_id, $clinic, $address, $phone, $details, $clinic_image);
+        clinic,district,county,subcounty,level,authority,ownership,phone,details,clinic_image) VALUES (?, ?, ?, ?,?,?,?,?,?,?,?)");
+        $stmt->bind_param("issssssssss", $user_id, $clinic, $district,$county,$subcounty,$level,$authority,$ownership, $phone, $details, $clinic_image);
         $result = $stmt->execute();
         $stmt->close();
 
@@ -1336,7 +1341,8 @@ VALUES (1, 1, UNIX_TIMESTAMP());");
     {
         $to_limit = !empty($limit) ? ' LIMIT ' . $limit : '';
         $search = !empty($search) ? " WHERE clinic LIKE '%" . $search."%' " : " ";
-        $stmt = "SELECT * FROM " . DB_PREFIX . "_clinics" .$search. $to_limit;
+        $stmt = "SELECT user_id,clinic,CONCAT_WS(',',district,county,subcounty) AS address,
+       level,authority,ownership,phone,details,clinic_image, created_at FROM " . DB_PREFIX . "_clinics" .$search. $to_limit;
         if ($api) {
             $stmt = "SELECT id,clinic as text FROM " . DB_PREFIX . "_clinics" .$search. $to_limit;
         }
@@ -1353,8 +1359,9 @@ VALUES (1, 1, UNIX_TIMESTAMP());");
     public function getPagedClinics($limit = 5, $offset = 0, $search = '', $location = '', $sort = '')
     {
         $status = !empty($sort) ? " AND status =" . $sort : '';
-        $address = !empty($location) ? " AND address LIKE '%" . $location . "%'" : '';
-        $stmt = "SELECT* FROM " . DB_PREFIX . "_clinics 
+        $address = !empty($location) ? " AND CONCAT_WS(',',district,county,subcounty) LIKE '%" . $location . "%'" : '';
+        $stmt = "SELECT user_id,clinic,CONCAT_WS(', ',district,county,subcounty) AS address,
+       level,authority,ownership,phone,details,clinic_image, created_at FROM " . DB_PREFIX . "_clinics 
         WHERE clinic like '%$search%'" . $status . $address . " ORDER BY id DESC LIMIT $offset, $limit";
         $results = $this->mysqli->query($stmt);
         $trXs = array();
@@ -1368,8 +1375,8 @@ VALUES (1, 1, UNIX_TIMESTAMP());");
     function getClinicsCount($sort = '', $search = '', $location = '')
     {
         $status = !empty($sort) ? " AND status =" . $sort : '';
-        $address = !empty($location) ? " AND address LIKE '%" . $location . "%'" : '';
-        $total_pages_sql = "SELECT* FROM " . DB_PREFIX . "_clinics WHERE clinic LIKE '%$search%'" . $status . $address . " ORDER BY id DESC";
+        $address = !empty($location) ? " AND CONCAT_WS(',',district,county,subcounty) LIKE '%" . $location . "%'" : '';
+        $total_pages_sql = "SELECT * FROM " . DB_PREFIX . "_clinics WHERE clinic LIKE '%$search%'" . $status . $address . " ORDER BY id DESC";
         $stmt = $this->mysqli->prepare($total_pages_sql);
         $stmt->execute();
         $stmt->store_result();
@@ -1380,7 +1387,8 @@ VALUES (1, 1, UNIX_TIMESTAMP());");
     public function getApprovedClinics($limit = '')
     {
         $to_limit = !empty($limit) ? ' LIMIT ' . $limit : '';
-        $stmt = "SELECT * FROM " . DB_PREFIX . "_clinics WHERE status=1" . $to_limit;
+        $stmt = "SELECT user_id,clinic,CONCAT_WS(',',district,county,subcounty) AS address,
+       level,authority,ownership,phone,details,clinic_image, created_at FROM " . DB_PREFIX . "_clinics WHERE status=1" . $to_limit;
         $results = $this->mysqli->query($stmt);
 
         $data = array();
@@ -1393,7 +1401,8 @@ VALUES (1, 1, UNIX_TIMESTAMP());");
 
     function getClinicByID($id)
     {
-        $stmt = "SELECT * FROM " . DB_PREFIX . "_clinics WHERE id = $id";
+        $stmt = "SELECT user_id,clinic,CONCAT_WS(',',district,county,subcounty) AS address,
+       level,authority,ownership,phone,details,clinic_image, created_at FROM " . DB_PREFIX . "_clinics WHERE id = $id";
         $result = $this->mysqli->query($stmt)->fetch_assoc();
 
         return !empty($result) ? $result : null;

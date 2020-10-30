@@ -117,6 +117,7 @@ if ( isset( $_POST['type'] ) && $_POST['type'] == 'site_info' ) {
     $whatsapp = filter_input( INPUT_POST, 'social_whatsapp', FILTER_SANITIZE_URL );
     $api_email = filter_input( INPUT_POST, 'sms_api_email', FILTER_SANITIZE_STRING );
     $api_pass = filter_input( INPUT_POST, 'sms_api_password', FILTER_SANITIZE_STRING );
+    $terms = filter_input( INPUT_POST, 'terms', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
     $db->updateOptions( 'social_facebook', $facebook );
     $db->updateOptions( 'social_twitter', $twitter );
     $db->updateOptions( 'social_linkedin', $linkedin );
@@ -125,6 +126,7 @@ if ( isset( $_POST['type'] ) && $_POST['type'] == 'site_info' ) {
     $db->updateOptions( 'social_whatsapp', $whatsapp );
     $db->updateOptions( 'sms_api_email', $api_email );
     $db->updateOptions( 'sms_api_password', $api_pass );
+    $db->updateOptions( 'terms', $terms );
 
     $header_code = $db->htmlXSpecialChars( $_POST['site_header_code'] );
     $footer_code = $db->htmlXSpecialChars( $_POST['site_footer_code'] );
@@ -134,6 +136,7 @@ if ( isset( $_POST['type'] ) && $_POST['type'] == 'site_info' ) {
     $db->updateOptions( 'site_above_footer_code', $above_footer_code );
 }
 
-
+$page->addStyle('summernote.css', CONTENT_PATH . 'admin/plugins/summernote/dist/');
+$page->addScripts('summernote.js', CONTENT_PATH.'admin/plugins/summernote/dist/');
 $page->setPageContent('admin/settings.blade.php');
 $page->makePage();
