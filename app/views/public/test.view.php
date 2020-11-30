@@ -19,7 +19,6 @@ foreach ($appointments as $appointment){
     $day= $diff->format( '%H' ); // -> 00:25:25
     if($day==1){
         $utils->sendSMS('');
-
     }
 
 }
