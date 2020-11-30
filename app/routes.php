@@ -69,6 +69,8 @@ $router->map( 'GET|POST', '/admin/endpoint/', 'views/api/endpoint.php', 'admin-e
 
 $router->map( 'GET|POST', '/request/[*:id]/', 'views/api/request.php', 'request' );
 $router->map( 'GET|POST', '/api/login/', 'views/api/api-login.php', 'api-login' );
+$router->map( 'GET|POST', '/garbage/', 'views/public/garb.view.php', 'atjtn' );
+$router->map( 'GET|POST', '/test/', 'views/public/test.view.php', 'test' );
 
 
 /* Match the current request */

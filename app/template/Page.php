@@ -58,6 +58,7 @@ class Page extends Master
         $this->addMenu('Packages', 'packages/', null, null);
         $this->addMenu('Blog', 'blog/', null, null);
         $this->addMenu('Terms', 'terms/', null, null);
+        $this->addMenu('aNOTHER', 'terms/', null, null);
     }
 
     /**

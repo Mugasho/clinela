@@ -1,5 +1,8 @@
 <?php
-$db = new \clinela\database\DB();
+use clinela\database\DB;
+
+
+$db = new DB();
 $page = new \clinela\template\Page('Patient Profile');
 $id = isset($match['params']['id']) ? $match['params']['id'] : null;
 $db->hasAccess('doctor/patient/' . $id, 1);

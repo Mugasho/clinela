@@ -296,6 +296,7 @@ VALUES (1, 1, UNIX_TIMESTAMP());");
         $this->addOption( 'sms_api_email', '' );
         $this->addOption( 'sms_api_password', '' );
         $this->addOption( 'terms', '' );
+        $this->addOption( 'option', '' );
 
 
 
